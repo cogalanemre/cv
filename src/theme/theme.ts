@@ -1,97 +1,106 @@
-import { createTheme } from '@mui/material/styles';
-import { validateColorPalette } from '../utils/colorUtils';
+"use client";
 
-// Ana renk paleti
-const palette = {
-  primary: {
-    main: '#1976d2',
-    light: '#42a5f5',
-    dark: '#1565c0',
-    contrastText: '#ffffff',
-  },
-  secondary: {
-    main: '#9c27b0',
-    light: '#ba68c8',
-    dark: '#7b1fa2',
-    contrastText: '#ffffff',
-  },
+import { ThemeOptions, Theme } from "@mui/material/styles";
+import config from "@/config/config.json";
+
+// Sabit tema değerleri
+export const COMMON_COLORS = {
   background: {
-    default: '#ffffff',
-    paper: '#f5f5f5',
+    light: {
+      default: '#F5F5F5',
+      paper: '#FFFFFF',
+    },
+    dark: {
+      default: '#0C1018',
+      paper: '#060607',
+    },
   },
   text: {
-    primary: '#212121',
-    secondary: '#757575',
-  },
-};
-
-// Renk paletini doğrula
-const colorValidation = validateColorPalette({
-  'primary.main': palette.primary.main,
-  'primary.contrastText': palette.primary.contrastText,
-  'secondary.main': palette.secondary.main,
-  'secondary.contrastText': palette.secondary.contrastText,
-  'background.default': palette.background.default,
-  'background.paper': palette.background.paper,
-  'text.primary': palette.text.primary,
-  'text.secondary': palette.text.secondary,
-});
-
-// Eğer kontrast sorunları varsa konsola uyarı bas
-if (!colorValidation.valid) {
-  console.warn('Renk kontrastı sorunları tespit edildi:', colorValidation.issues);
-}
-
-const theme = createTheme({
-  palette,
-  typography: {
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-    h1: {
-      fontSize: '2.5rem',
-      fontWeight: 500,
-      lineHeight: 1.2,
-      '@media (max-width:600px)': {
-        fontSize: '2rem',
-      },
+    light: {
+      primary: '#212121',
+      secondary: '#616161',
     },
-    h2: {
-      fontSize: '2rem',
-      fontWeight: 500,
-      lineHeight: 1.3,
-      '@media (max-width:600px)': {
-        fontSize: '1.75rem',
-      },
-    },
-    body1: {
-      fontSize: '1rem',
-      lineHeight: 1.5,
+    dark: {
+      primary: '#ffffff',
+      secondary: 'rgba(255, 255, 255, 0.7)',
     },
   },
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          textTransform: 'none',
-          borderRadius: '8px',
-          padding: '8px 16px',
-          '&:focus-visible': {
-            outline: '2px solid #000',
-            outlineOffset: '2px',
-          },
-        },
-      },
-    },
-    MuiLink: {
-      styleOverrides: {
-        root: {
-          '&:focus-visible': {
-            outline: '2px solid #000',
-            outlineOffset: '2px',
-          },
-        },
-      },
+  divider: {
+    light: 'grey.300',
+    dark: 'grey.900',
+  },
+} as const;
+
+const BORDER = {
+  border: '0.5px solid',
+  borderColor: (theme: Theme) => theme.palette.mode === 'dark' ? 'grey.900' : 'grey.300',
+} as const;
+
+export const THEME_STYLE = {
+  CARD: {
+    ...BORDER,
+    bgcolor: 'background.paper',
+    borderRadius: '16px',
+    position: "relative",
+    height: "100%",
+    boxShadow: '0px 0px 0px 0px rgba(0, 0, 0, 0.1)',
+  },
+  AVATAR: {
+    ...BORDER,
+    width: 80,
+    height: 80,
+    bgcolor: "transparent",
+    display: { xs: "none", md: "flex" },
+    alignItems: 'center',
+    justifyContent: 'center',
+    "& img": {
+      objectFit: "cover",
+      borderRadius: "50%",
     },
   },
-});
+  CHIP: {
+    ...BORDER,
+    fontSize: "0.875rem",
+    color: "text.main",
+    bgcolor: "background.paper",
+    borderRadius: '8px',
+  },
+  BORDER: {
+    ...BORDER,
+  },
+  TITLE: {
+    fontSize: '1.2rem',
+    fontWeight: 'bold',
+  },
+  SUBTITLE: {
+    fontSize: '1rem',
+    fontWeight: 'bold',
+    color: 'primary.main',
+  },
+  META: {
+    display: "flex",
+    flexDirection: { xs: "column", sm: "row" },
+    gap: { xs: 1, sm: 2 },
+    mt: 1,
+    flexWrap: "wrap",
+    alignItems: "center",
+  },
+  CARD_HEADER: {
+    ...BORDER,
+    p: 3,
+  },
+} as const;
+
+/**
+ * Tema konfigürasyonu
+ */
+const theme: ThemeOptions = {
+  palette: {
+    mode: 'light',
+    primary: {
+      main: config.theme.primaryColor,
+    },
+  },
+} as const;
 
 export default theme; 

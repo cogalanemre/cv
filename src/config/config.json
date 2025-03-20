@@ -1,0 +1,49 @@
+{
+  "domain": {
+    "production": "https://emrecogalan.com",
+    "development": "http://localhost:3000"
+  },
+  "features": {
+    "languageSwitcher": true,
+    "themeSwitcher": true,
+    "sections": {
+      "experience": true,
+      "skills": false,
+      "education": true,
+      "blog": true,
+      "contact": {
+        "showContactInfo": true,
+        "showMessageForm": true
+      }
+    }
+  },
+  "theme": {
+    "mode": "light",
+    "primaryColor": "#2497ff",
+    "fontFamily": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+  },
+  "language": {
+    "default": "en",
+    "supported": ["tr", "en"]
+  },
+  "email": {
+    "serviceId": "service_0v280wa",
+    "templateId": "template_d6vbew4",
+    "publicKey": "VbqA_ubqPCM6yAkLQ"
+  },
+  "api": {
+    "blog": {
+      "feedUrl": "https://medium.com/feed/@cogalanemre"
+    }
+  },
+  "security": {
+    "cors": {
+      "origins": {
+        "production": ["https://cogalanemre.com"],
+        "development": ["http://localhost:3000"]
+      },
+      "methods": ["GET", "POST"],
+      "credentials": true
+    }
+  }
+} 

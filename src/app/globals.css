@@ -3,19 +3,46 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light dark;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  opacity: 0;
+}
+
+#__next {
+  min-height: 100vh;
+}
+
+/* Flash önleme */
+html.light {
+  background: #F5F5F5;
+  color: #333333;
+}
+
+html.dark {
+  background: #121212;
+  color: #E0E0E0;
+}
+
+/* Tema geçiş animasyonu */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Sayfa yüklendiğinde içeriği göster */
+body.loaded {
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
