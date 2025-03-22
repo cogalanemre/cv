@@ -9,18 +9,8 @@
       "mail": "comengcogalan@gmail.com"
     },
     "titles": {
-      "tr": [
-        "Kıdemli Yazılım Mühendisi",
-        "Full Stack Geliştirici",
-        "Yazılım Danışmanı",
-        "Mikroservis Mimarı"
-      ],
-      "en": [
-        "Senior Software Engineer",
-        "Full Stack Developer",
-        "Software Consultant",
-        "Microservice Architect"
-      ]
+      "tr": ["Senior Software Engineer", "Full Stack Developer", "AI Researcher"],
+      "en": ["Senior Software Engineer", "Full Stack Developer", "AI Researcher"]
     }
   },
   "experiences": [
@@ -153,7 +143,7 @@
       "skillTags": ["Java", "Spring Boot", "Elasticsearch", "MySQL", "Google Cloud"]
     }
   ],
-  
+
   "education": [
     {
       "startDate": "2014-06-01",
@@ -208,4 +198,4 @@
       "en": "Istanbul, Turkey"
     }
   }
-} 
+}

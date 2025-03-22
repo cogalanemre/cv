@@ -1,31 +1,24 @@
 /**
  * Mesaj Kartı Bileşeni
- * 
+ *
  * İletişim formunu içeren kart bileşeni.
  * - Form validasyonu
  * - Responsive tasarım
  * - Tema entegrasyonu
  */
 
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardActions,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { Send } from "@mui/icons-material";
-import { useTranslation } from "@/hooks/useTranslation";
-import { memo } from "react";
-import CustomButton from "@/components/common/CustomButton";
-import { THEME_STYLE } from "@/theme/theme";
+import { Card, CardContent, CardHeader, CardActions, TextField, Typography } from '@mui/material';
+import { FaPaperPlane } from 'react-icons/fa';
+import { useTranslation } from '@/hooks/useTranslation';
+import { memo } from 'react';
+import CustomButton from '@/components/common/CustomButton';
+import { THEME_STYLE } from '@/theme/theme';
 
 const STYLE = {
   CARD: {
     ...THEME_STYLE.CARD,
     p: 0,
-  },  
+  },
   CARD_HEADER: {
     ...THEME_STYLE.CARD_HEADER,
   },
@@ -42,6 +35,21 @@ const STYLE = {
     p: 3,
     pt: 0,
   },
+  INPUT: {
+    '&:before': {
+      ...THEME_STYLE.BORDER_BOTTOM
+    },
+    '&:after': {
+      ...THEME_STYLE.BORDER_BOTTOM
+    },
+    '&:hover:not(.Mui-disabled):before': {
+      ...THEME_STYLE.BORDER_BOTTOM
+    },
+    '&.Mui-focused:after': {
+      ...THEME_STYLE.BORDER_BOTTOM,
+      borderColor: 'primary.main',
+    },
+  },
 } as const;
 
 interface FormData {
@@ -51,14 +59,14 @@ interface FormData {
   message: string;
 }
 
-type ContactFormKey = 
-  | "contact.form.name"
-  | "contact.form.email"
-  | "contact.form.phone"
-  | "contact.form.phoneOptional"
-  | "contact.form.message"
-  | "contact.form.send"
-  | "contact.sendMessage";
+type ContactFormKey =
+  | 'contact.form.name'
+  | 'contact.form.email'
+  | 'contact.form.phone'
+  | 'contact.form.phoneOptional'
+  | 'contact.form.message'
+  | 'contact.form.send'
+  | 'contact.sendMessage';
 
 interface FormField {
   name: keyof FormData;
@@ -79,7 +87,7 @@ interface MessageCardProps {
 
 /**
  * Mesaj Kartı Bileşeni
- * 
+ *
  * @returns {JSX.Element} Mesaj kartı
  */
 function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: MessageCardProps) {
@@ -88,24 +96,24 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
   // Form alanları konfigürasyonu
   const formFields: FormField[] = [
     {
-      name: "name",
-      label: "contact.form.name",
+      name: 'name',
+      label: 'contact.form.name',
       required: true,
     },
     {
-      name: "email",
-      label: "contact.form.email",
-      type: "email",
+      name: 'email',
+      label: 'contact.form.email',
+      type: 'email',
       required: true,
     },
     {
-      name: "phone",
-      label: "contact.form.phone",
+      name: 'phone',
+      label: 'contact.form.phone',
       isOptional: true,
     },
     {
-      name: "message",
-      label: "contact.form.message",
+      name: 'message',
+      label: 'contact.form.message',
       required: true,
       multiline: true,
       rows: 4,
@@ -113,29 +121,26 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
   ];
 
   return (
-    <Card
-      component="form"
-      onSubmit={onSubmit}
-      sx={STYLE.CARD}
-    >
+    <Card component="form" onSubmit={onSubmit} sx={STYLE.CARD}>
       <CardHeader
         title={
-          <Typography variant="h3" sx={{...STYLE.TITLE}}>
-            {t("contact.sendMessage")}
+          <Typography variant="h3" sx={{ ...STYLE.TITLE }}>
+            {t('contact.sendMessage')}
           </Typography>
-        }       
+        }
         sx={STYLE.CARD_HEADER}
       />
 
       {/* Form */}
       <CardContent sx={STYLE.CARD_CONTENT}>
-        {formFields.map((field) => (
+        {formFields.map(field => (
           <TextField
             key={field.name}
             name={field.name}
-            label={field.isOptional 
-              ? `${t(field.label)} (${t("contact.form.phoneOptional")})`
-              : t(field.label)
+            label={
+              field.isOptional
+                ? `${t(field.label)} (${t('contact.form.phoneOptional')})`
+                : t(field.label)
             }
             value={formData[field.name]}
             onChange={onChange}
@@ -144,6 +149,10 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
             multiline={field.multiline}
             rows={field.rows}
             placeholder={t(field.label)}
+            variant="standard"
+            InputProps={{
+              sx: STYLE.INPUT
+            }}
           />
         ))}
       </CardContent>
@@ -154,9 +163,9 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
           type="submit"
           loading={isSubmitting}
           fullWidth
-          endIcon={<Send fontSize="small" />}
+          endIcon={<FaPaperPlane size={20} />}
         >
-          {t("contact.form.send")}
+          {t('contact.form.send')}
         </CustomButton>
       </CardActions>
     </Card>
@@ -164,4 +173,4 @@ function MessageCard({ formData, onChange, onSubmit, isSubmitting = false }: Mes
 }
 
 // Gereksiz render'ları önlemek için memo kullan
-export default memo(MessageCard); 
+export default memo(MessageCard);

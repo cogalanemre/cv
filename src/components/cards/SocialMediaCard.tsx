@@ -1,6 +1,6 @@
 /**
  * Sosyal Medya Kartı Bileşeni
- * 
+ *
  * Kullanıcının sosyal medya bağlantılarını gösteren kart bileşeni.
  * Özellikler:
  * - Sosyal medya bağlantıları (GitHub, LinkedIn, Medium)
@@ -8,27 +8,23 @@
  * - Hover animasyonları
  * - Tema renk entegrasyonu
  * - Erişilebilirlik özellikleri
- * 
+ *
  * @component
  */
 
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Box,
-} from "@mui/material";
-import { FaMediumM, FaLinkedinIn, FaGithub } from "react-icons/fa";
-import { useTranslation } from "@/hooks/useTranslation";
-import InfoWithIcon from "@/components/common/InfoWithIcon";
-import resumeData from "@/config/resume.json";
-import { memo } from "react";
-import { IconType } from "react-icons";
-import { THEME_STYLE } from "@/theme/theme";
+import { Card, CardContent, CardHeader, Box, Typography } from '@mui/material';
+import { FaMediumM, FaLinkedinIn, FaGithub } from 'react-icons/fa';
+import { useTranslation } from '@/hooks/useTranslation';
+import InfoWithIcon from '@/components/common/InfoWithIcon';
+import resumeData from '@/config/resume.json';
+import { memo } from 'react';
+import { IconType } from 'react-icons';
+import { THEME_STYLE } from '@/theme/theme';
 
 const STYLE = {
   CARD: {
     ...THEME_STYLE.CARD,
+    p: 0,
   },
   CARD_HEADER: {
     ...THEME_STYLE.CARD_HEADER,
@@ -37,7 +33,9 @@ const STYLE = {
     display: 'flex',
     flexDirection: 'column',
     gap: 2,
-    p: 3,
+  },
+  TITLE: {
+    ...THEME_STYLE.TITLE,
   },
 } as const;
 
@@ -48,7 +46,7 @@ interface SocialLink {
 
 /**
  * Sosyal Medya Kartı Bileşeni
- * 
+ *
  * @returns {JSX.Element} Sosyal medya kartı
  */
 function SocialMediaCard() {
@@ -73,34 +71,34 @@ function SocialMediaCard() {
 
   return (
     <Card sx={STYLE.CARD}>
-        <CardHeader
-          title={t("sections.social")}
-          sx={STYLE.CARD_HEADER}
-        />
+      <CardHeader
+        title={
+          <Typography variant="h3" sx={{ ...STYLE.TITLE }}>
+            {t('sections.social')}
+          </Typography>
+        }
+        sx={STYLE.CARD_HEADER}
+      />
 
       {/* Sosyal Medya Bağlantıları */}
-      <CardContent sx={STYLE.CARD_CONTENT}>
-        {Object.entries(socialLinks).map(([key, { url, icon }]) => (
-          url && (
-            <Box
-              key={key}
-              component="a"
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <InfoWithIcon
-                icon={icon}
-                text={url.replace("https://", "")}
-                fontSize="1rem"
-              />
-            </Box>
-          )
-        ))}
+      <CardContent>
+        <Box sx={STYLE.CARD_CONTENT}>
+          {Object.entries(socialLinks).map(
+            ([key, { url, icon }]) =>
+              url && (
+                <InfoWithIcon
+                  key={key}
+                  icon={icon}
+                  text={url.replace('https://', '')}
+                  fontSize="1rem"
+                />
+              )
+          )}
+        </Box>
       </CardContent>
     </Card>
   );
 }
 
 // Gereksiz render'ları önlemek için memo kullan
-export default memo(SocialMediaCard); 
+export default memo(SocialMediaCard);

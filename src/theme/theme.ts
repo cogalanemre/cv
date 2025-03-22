@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { ThemeOptions, Theme } from "@mui/material/styles";
-import config from "@/config/config.json";
+import { ThemeOptions } from '@mui/material/styles';
+import config from '@/config/config.json';
 
 // Sabit tema değerleri
 export const COMMON_COLORS = {
@@ -12,7 +12,7 @@ export const COMMON_COLORS = {
     },
     dark: {
       default: '#0C1018',
-      paper: '#060607',
+      paper: '#121213',
     },
   },
   text: {
@@ -26,47 +26,64 @@ export const COMMON_COLORS = {
     },
   },
   divider: {
-    light: 'grey.300',
-    dark: 'grey.900',
+    light: '#E0E0E0',
+    dark: '#424242',
   },
-} as const;
-
-const BORDER = {
-  border: '0.5px solid',
-  borderColor: (theme: Theme) => theme.palette.mode === 'dark' ? 'grey.900' : 'grey.300',
 } as const;
 
 export const THEME_STYLE = {
   CARD: {
-    ...BORDER,
+    border: '0.5px solid',
+    borderColor: 'divider',
     bgcolor: 'background.paper',
     borderRadius: '16px',
-    position: "relative",
-    height: "100%",
-    boxShadow: '0px 0px 0px 0px rgba(0, 0, 0, 0.1)',
+    position: 'relative',
+    height: '100%',
+    boxShadow: 'none',
+    backgroundImage: 'none',
   },
   AVATAR: {
-    ...BORDER,
+    border: '0.5px solid',
+    borderColor: 'divider',
     width: 80,
     height: 80,
-    bgcolor: "transparent",
-    display: { xs: "none", md: "flex" },
+    bgcolor: 'transparent',
+    display: { xs: 'none', md: 'flex' },
     alignItems: 'center',
     justifyContent: 'center',
-    "& img": {
-      objectFit: "cover",
-      borderRadius: "50%",
+    '& img': {
+      objectFit: 'cover',
+      borderRadius: '50%',
     },
   },
   CHIP: {
-    ...BORDER,
-    fontSize: "0.875rem",
-    color: "text.main",
-    bgcolor: "background.paper",
+    border: '0.5px solid',
+    borderColor: 'divider',
+    fontSize: '0.875rem',
+    color: 'text.main',
+    bgcolor: 'background.paper',
     borderRadius: '8px',
+    transition: 'all 0.2s ease-in-out',
+    cursor: 'pointer',
+    '&:hover': {
+      transform: 'translateY(-2px)',
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+      bgcolor: 'background.paper',
+      borderColor: 'primary.main',
+    },
+    '&.selected': {
+      bgcolor: 'primary.main',
+      color: 'white',
+      borderColor: 'primary.main',
+    },
   },
   BORDER: {
-    ...BORDER,
+    border: '0.5px solid',
+    borderColor: 'divider',
+  },
+  BORDER_BOTTOM: {
+    borderBottom: '0.5px solid',
+    borderColor: 'divider',
   },
   TITLE: {
     fontSize: '1.2rem',
@@ -78,16 +95,21 @@ export const THEME_STYLE = {
     color: 'primary.main',
   },
   META: {
-    display: "flex",
-    flexDirection: { xs: "column", sm: "row" },
+    display: 'flex',
+    flexDirection: { xs: 'column', sm: 'row' },
     gap: { xs: 1, sm: 2 },
     mt: 1,
-    flexWrap: "wrap",
-    alignItems: "center",
+    flexWrap: 'wrap',
+    alignItems: 'center',
   },
   CARD_HEADER: {
-    ...BORDER,
+    borderBottom: '0.5px solid',
+  borderColor: 'divider',
     p: 3,
+  },
+  SECTION: {
+    component: 'section',
+    py: 5,
   },
 } as const;
 
@@ -100,7 +122,10 @@ const theme: ThemeOptions = {
     primary: {
       main: config.theme.primaryColor,
     },
+    divider: COMMON_COLORS.divider.light,
+    background: COMMON_COLORS.background.light,
+    text: COMMON_COLORS.text.light,
   },
 } as const;
 
-export default theme; 
+export default theme;
