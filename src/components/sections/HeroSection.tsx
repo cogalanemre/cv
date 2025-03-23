@@ -56,7 +56,7 @@ const STYLE = {
       left: '50%',
       transform: 'translateX(-50%)',
       width: '80%',
-      height: '2px',
+      height: '0.5px',
       background: theme =>
         `linear-gradient(90deg, transparent, ${theme.palette.primary.main}, transparent)`,
     },
@@ -72,7 +72,7 @@ const STYLE = {
     fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
     textAlign: ALIGNMENT,
     fontWeight: 'normal',
-    fontFamily: 'var(--font-poppins)',
+    fontFamily: 'Nunito, Roboto, Helvetica, Arial, sans-serif',
     display: 'flex',
     alignItems: 'center',
     gap: 2,
